@@ -1,14 +1,22 @@
 <template>
-
     <div>
-        <h1>
-            hello assignaments
-        </h1>
+      <h1>Assignments Page</h1>
+      <CustomButton @click="handleClick">Submit</CustomButton>
     </div>
-</template>
-
-<script setup>
-</script>
-
-<style>
-</style>
+  </template>
+  
+  <script>
+  import CustomButton from '../components/buttons/Button.vue';
+  
+  export default {
+    components: {
+      CustomButton
+    },
+    methods: {
+      handleClick() {
+        console.log('Button clicked in Assignments Page!');
+      }
+    }
+  }
+  </script>
+  

@@ -1,24 +1,36 @@
 <template>
-    <div>
-        <button @click="handleClick">{{ props.label }}</button>
-    </div>
-</template>
-
-<script setup>
-const props = defineProps({
-    label:{
-        type:String,
-        require:true,
-        default:"No tengo texto"
+    <button @click="handleClick">
+      <slot></slot> <!-- Para que sea un botón reutilizable -->
+    </button>
+  </template>
+  
+  <script>
+  export default {
+    name: 'CustomButton',
+    props: {
+      onClick: {
+        type: Function,
+        required: false
+      }
     },
-    onClickFunction:{
-        type:Function,
-        require:true
+    methods: {
+      handleClick() {
+        if (this.onClick) {
+          this.onClick();
+        }
+      }
     }
-})
-
-function handleClick (){
-    props.onClickFunction()
-}
-
-</script>
+  }
+  </script>
+  
+  <style scoped>
+  button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  </style>
+  
