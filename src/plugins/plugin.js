@@ -12,17 +12,4 @@ library.add(faPenToSquare, faBan, faCheck, faFileInvoice, faSpellCheck,
 faAddressCard, faPhone, faEnvelope, faUsersLine, faLock, faHashtag, 
 faUserGraduate, faCalendarDays,faFloppyDisk, faCircleXmark)
 
-
-
-// import axios from 'axios';
-
-// const token = localStorage.getItem('token');  // Ejemplo de cómo obtener el token
-
-// const apiClient = axios.create({
-//     baseURL: 'https://api.example.com',
-//     headers: {
-//         "x-token": token
-//     }
-// });
-
-// export default apiClient;
+myApp.component('font-awesome-icon', FontAwesomeIcon);
