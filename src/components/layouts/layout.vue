@@ -1,169 +1,54 @@
 <template>
-    <div class="q-pa-md">
-      <q-layout view="hHh LpR fFf" container style="height: 100vh; overflow: hidden;" class="shadow-2 rounded-borders">
-        <!-- Header -->
-        <q-header elevated :class="$q.dark.isActive ? 'bg-secondary' : 'bg-green-8'">
-          <q-toolbar>
-            <q-btn flat @click="toggleDrawer" round dense icon="menu" />
-            <q-toolbar-title>ASISTE</q-toolbar-title>
-            <q-btn @click="Logout" icon="arrow_back" :style="{ backgroundColor: 'rgba(47, 125, 50, 0.9)', color: 'white' }" />
-          </q-toolbar>
-        </q-header>
-  
-        <!-- Drawer -->
-        <q-drawer v-model="drawer" :width="250" side="left" overlay :mini="miniState" @mouseover="miniState = false"
-        @mouseout="miniState = true" bordered :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-green-dark'" dark elevated>
-          <q-img class="absolute-top" src="" style="height: 150px; background-color: rgba(47, 125, 50, 0.9);"></q-img>
-          <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; background-color: rgba(47, 125, 50, 0.9);">
-            <q-list padding>
-              <!-- Home Button -->
-              <q-item clickable to="/home" v-ripple class="drawer-item">
-                <q-item-section avatar>
-                  <q-icon name="home" class="drawer-icon" />
-                </q-item-section>
-                <q-item-section class="drawer-label">Home</q-item-section>
-              </q-item>
-  
-              <!-- Bitacoras Button -->
-              <q-item clickable to="/bitacoras" v-ripple class="drawer-item">
-                <q-item-section avatar>
-                  <q-icon name="person" class="drawer-icon" />
-                </q-item-section>
-                <q-item-section class="drawer-label">Bitacoras</q-item-section>
-              </q-item>
-  
-              <!-- Fichas Button -->
-              <q-item clickable to="/fichas" v-ripple class="drawer-item">
-                <q-item-section avatar>
-                  <q-icon name="drafts" class="drawer-icon" />
-                </q-item-section>
-                <q-item-section class="drawer-label">Fichas</q-item-section>
-              </q-item>
-  
-              <!-- Aprendices Button -->
-              <q-item clickable to="/aprendiz" v-ripple class="drawer-item">
-                <q-item-section avatar>
-                  <q-icon name="star" class="drawer-icon" />
-                </q-item-section>
-                <q-item-section class="drawer-label">Aprendices</q-item-section>
-              </q-item>
-            </q-list>
-          </q-scroll-area>
-        </q-drawer>
-  
-        <!-- Footer -->
-        <q-footer elevated class="bg-green-9" style="padding: 20px 0;">
-          <q-toolbar style="justify-content: center;">
-            <q-toolbar-title class="text-center">
-              <span class="text-bold" style="color: white; font-size: 22px; letter-spacing: 0.5px;">
-                2024 Todos los derechos reservados
-              </span>
-            </q-toolbar-title>
-          </q-toolbar>
-        </q-footer>
-      </q-layout>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref, computed } from 'vue';
-  import { useRouter, useRoute } from 'vue-router';
-  
-  const router = useRouter();
-  const route = useRoute();
-  const drawer = ref(false);
-  const miniState = ref(true);
-  
-  const toggleDrawer = () => {
-    drawer.value = !drawer.value;
-  };
-  
-  const Logout = async () => {
-    await useUsuarios.logout();
-    router.replace("/");
-  };
-  
-  // Computed property to check the current path
-  const currentPath = computed(() => route.path);
-  </script>
-  
-  <style scoped>
-  /* General layout padding */
-  .q-pa-md {
-    margin: 0;
-    padding: 0;
+  <q-layout view="hHh lpR fFf">
+
+    <q-header elevated class="bg-green-8 text-white">
+      <q-toolbar>
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          Title
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" elevated>
+      <!-- drawer content -->
+    </q-drawer>
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+
+    <q-footer elevated class="bg-grey-8 text-white">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          <div>Title</div>
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
+
+  </q-layout>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup () {
+    const leftDrawerOpen = ref(false)
+
+    return {
+      leftDrawerOpen,
+      toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
   }
-  
-  /* Drawer styles */
-  .q-drawer {
-    background-color: rgba(47, 125, 50, 0.9) !important;
-    color: white;
-  }
-  
-  .drawer-item {
-    background-color: white;
-    border-radius: 12px;
-    color: #2F7D32;
-    margin-bottom: 15px;
-    padding: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .drawer-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .drawer-icon {
-    font-size: 24px;
-  }
-  
-  .drawer-label {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  /* Card styles */
-  .card {
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .card-header {
-    background-color: rgba(47, 125, 50, 0.9);
-    color: white;
-    border-radius: 12px 12px 0 0;
-    padding: 15px;
-  }
-  
-  .q-img {
-    border-radius: 12px;
-  }
-  
-  .btn-styled {
-    background-color: rgba(47, 125, 50, 0.9);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-styled:hover {
-    background-color: rgba(47, 125, 50, 1);
-  }
-  
-  .cards {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  </style>
+}
+</script>
