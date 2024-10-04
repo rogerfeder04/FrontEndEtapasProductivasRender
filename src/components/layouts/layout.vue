@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh lpR fFf" class="layout-no-margin">
 
     <q-header elevated class="bg-green-8 text-white">
       <q-toolbar>
@@ -18,7 +18,7 @@
       <!-- drawer content -->
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="page-no-margin">
       <router-view />
     </q-page-container>
 
@@ -36,19 +36,31 @@
   </q-layout>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script setup>
+import { ref } from 'vue';
 
-export default {
-  setup () {
-    const leftDrawerOpen = ref(false)
+const leftDrawerOpen = ref(false);
+const isLoading = ref(false);
 
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
+const toggleLeftDrawer = () => {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 </script>
+
+<style scoped>
+.layout-no-margin .q-page-container {
+  margin-top: 0; /* Ajusta según sea necesario */
+}
+
+.q-layout--standard{
+
+  min-height: 0px !important;
+}
+
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Espacio entre las cards */
+}
+</style>
