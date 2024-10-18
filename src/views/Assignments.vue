@@ -26,7 +26,8 @@
   >
   </CustomButton>
 
-  <CustomModal></CustomModal>
+  <CustomModal
+  message=""></CustomModal>
 </q-page-container>
 </q-layout>
 </template>
@@ -39,6 +40,7 @@ import Sidebar from "@/components/layouts/Sidebar.vue";
 import Table from "@/components/tables/Table.vue";
 import CustomButton from "@/components/buttons/CustomButton.vue"
 import CustomModal from "@/components/modals/CustomModal.vue"
+import Input from "@/components/inputs/inputs.vue"
 
 import { getData } from "@/services/apiClient.js";
 
