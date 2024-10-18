@@ -1,15 +1,19 @@
 <template>
-    <q-card class="my-card" flat bordered @click="goToRoute(route)">
-      <div class="colorCorporativo flex-container">
-        <q-img :src="imgSrc" class="flex-img" />
+    <q-card class="myCard" flat bordered @click="goToRoute(route)">
+      <div class="flexContainer">
+        <q-img :src="imgSrc" />
       </div>
-      <q-card-section class="flex-content">
+      <q-card-section class="flexContent">
         <div class="text-h6 q-mt-sm q-mb-xs">{{ title }}</div>
       </q-card-section>
     </q-card>
   </template>
   
   <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
   const props = defineProps({
     route: {
       type: String,
@@ -25,26 +29,29 @@
     }
   });
   
-  const goToRoute = (route) => {
-    this.$router.push(route);
-  };
+  const goToRoute = () => {
+  if (props.route) {
+    router.push({ path: props.route }).catch(err => {
+      if (err.name !== 'NavigationDuplicated') {
+        throw err;
+      }
+    });
+  }
+};
   </script>
   
   <style scoped>
-  .my-card {
+  .myCard {
     width: 100%;
-    max-width: 400px;
+    cursor: pointer;
   }
-  .flex-container {
+  .flexContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 16px;
   }
-  .flex-img {
-    max-width: 150px;
-  }
-  .flex-content {
+  .flexContent {
     text-align: center;
   }
   </style>
