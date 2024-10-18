@@ -1,12 +1,12 @@
 <template>
     <q-dialog v-model="dialog" :backdrop-filter="backdropFilter">
       <q-card>
-        <q-card-section class="row items-center q-pb-none text-h6">
+        <q-card-section class="row items-center q-pb-none text-h4 text-white bg-primary ">
           {{ title }}
         </q-card-section>
   
         <q-card-section>
-          {{ message }}
+          {{ content }}
         </q-card-section>
   
         <q-card-actions align="right">
@@ -35,7 +35,7 @@
       required: false,
       default: 'Dialog',
     },
-    message: {
+    content: {
       type: String,
       required: false,
       default: 'This dialog has a backdrop filter.',
