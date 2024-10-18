@@ -6,11 +6,7 @@
 
 <script setup>
 
-
-
 </script>
-
-
 
 
 <style>
