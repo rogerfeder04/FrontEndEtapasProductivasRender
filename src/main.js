@@ -21,7 +21,9 @@ import { faPenToSquare, faBan, faCheck, faFileInvoice, faSpellCheck,
   faAddressCard, faPhone, faEnvelope, faUsersLine, faLock, 
   faHashtag, faUserGraduate, faCalendarDays, faFloppyDisk, faCircleXmark,
   faHouse, faPeopleArrows, faSquarePollHorizontal, faReceipt, faMagnifyingGlassChart,
-  faShapes
+  faShapes, faFile, faChalkboardUser,faPersonChalkboard, faStreetView, faImage,
+  faListOl, faEnvelopeOpenText, faBuilding, faMapLocationDot, faUserTie, faStopwatch,
+  faClock, faCircleCheck
 } from '@fortawesome/free-solid-svg-icons';
 
 // Añadir el ícono a la librería de Font Awesome
@@ -29,7 +31,11 @@ library.add(faPenToSquare, faBan, faCheck, faFileInvoice, faSpellCheck,
   faAddressCard, faPhone, faEnvelope, faUsersLine, faLock, faHashtag, 
   faUserGraduate, faCalendarDays,faFloppyDisk, faCircleXmark, faHouse,
   faPeopleArrows, faSquarePollHorizontal, faReceipt, faMagnifyingGlassChart,
-faShapes);
+faShapes, faFile, faChalkboardUser, faPersonChalkboard, faStreetView, faImage,
+faListOl, faEnvelopeOpenText, faBuilding, faMapLocationDot, faUserTie, faStopwatch,
+faClock, faCircleCheck
+
+);
     
 // Assumes your root component is App.vue
 // and placed in same folder as main.js

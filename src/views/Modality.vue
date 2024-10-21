@@ -11,6 +11,9 @@
         @update:drawerOpen="toggleDrawer"
       />
 
+      <CustomButton label="CREAR MODALIDAD" :onClickFunction="openDialog">
+      </CustomButton>
+
     <div class="table-container">
       <Table
         :rows="rows"
@@ -21,6 +24,56 @@
       ></Table>
     </div>
 
+    <CustomModal
+        :modelValue="dialog"
+        :title="dialogTitle"
+        :onSave="saveAssignment"
+        @update:modelValue="dialog = $event"
+      >
+        <template #content>
+          <InputLog
+            id="name"
+            filled
+            label="Nombre de la modalidad"
+            v-model="name"
+            required
+            errorMessage="Nombre de la modalidad requerido"
+            icon="file"
+            type="text"
+          />
+
+          <InputLog
+            id="hourInstructorFollow"
+            filled
+            label="Horas del Instructor de Seguimiento"
+            v-model="hourInstructorFollow"
+            required
+            errorMessage="Horas requeridas"
+            icon="chalkboard-user"
+            type="text"
+          />
+          <InputLog
+            id="hourInstructorTechnical"
+            filled
+            label="Horas del Instructor Técnico"
+            v-model="hourInstructorTechnical"
+            required
+            errorMessage="Horas requeridas"
+            icon="street-view"
+            type="text"
+          />
+          <InputLog
+            id="hourInstructorProject"
+            filled
+            label="Horas de Instructor de Proyecto"
+            v-model="hourInstructorProject"
+            required
+            errorMessage="Horas requeridas"
+            icon="person-chalkboard"
+            type="text"
+          />
+        </template>
+      </CustomModal>
   </q-page-container>
 </q-layout>
 </template>
@@ -31,10 +84,31 @@ import { ref, onBeforeMount } from "vue";
 import Header from "@/components/layouts/Header.vue";
 import Sidebar from "@/components/layouts/Sidebar.vue";
 import Table from "@/components/tables/Table.vue";
+import CustomButton from "@/components/buttons/CustomButton.vue";
+import CustomModal from "../components/modals/CustomModal.vue";
+import InputLog from "@/components/inputs/Inputs.vue";
+import { notifyErrorRequest, notifySuccessRequest } from "@/composables/notify/Notify.vue";
 
-import { getData } from "@/services/apiClient.js";
+import { getData, postData } from "@/services/apiClient.js";
 
 const title = ref("MODALIDADES");
+const dialog = ref(false);
+const dialogTitle = ref("CREAR MODALIDAD");
+
+//v-models de los inputs
+const name = ref("");
+const hourInstructorFollow = ref("");
+const hourInstructorTechnical = ref("");
+const hourInstructorProject = ref("");
+
+
+const modalityData = {
+  name: name.value,
+  hourInstructorFollow: hourInstructorFollow.value,
+  hourInstructorTechnical: hourInstructorTechnical.value,
+  hourInstructorProject: hourInstructorProject.value,
+
+};
 const rows = ref([]);
 const columns = ref([
   {
@@ -84,10 +158,21 @@ function toggleDrawer() {
   drawerOpen.value = !drawerOpen.value;
 }
 
-const openDialog = (row) => {
-  selectedRow.value = row;
-  alert.value = true;
-  console.log(row);
+const openDialog = () => {
+  dialog.value = true;
+};
+
+const saveModality = async () => {
+  try {
+    let response = await postData("Modality/addmodality", modalityData);
+
+    // Si la respuesta es exitosa, actualizamos la tabla y cerramos el modal
+    rows.value = response;
+    dialog.value = false;
+    notifySuccessRequest("Asignación guardada exitosamente");
+  } catch (error) {
+    notifyErrorRequest("Ocurrió un error al guardar la asignación");
+  }
 };
 
 const toggleEstado = (row) => {

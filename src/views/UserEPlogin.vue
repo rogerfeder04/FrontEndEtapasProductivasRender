@@ -33,7 +33,7 @@
         placeholder="Ingresa tu correo"
         v-model="email"
         type="email"
-        errorMessage="Correo inválido"
+        errorMessage="El email es obligatorio"
         icon="envelope"
       />  
 
@@ -53,7 +53,7 @@
         placeholder="Ingresa tu documento"
         v-model="document"
         type="Text"
-        errorMessage="Correo inválido"
+        errorMessage="El documento es obligatorio"
         icon="address-card"
       />  
   

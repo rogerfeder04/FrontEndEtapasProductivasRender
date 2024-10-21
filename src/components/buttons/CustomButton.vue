@@ -1,7 +1,8 @@
 <template>
     <div>
         <q-btn 
-            :class="[btnStyles, props.class]"            :color="color"
+            :class="[btnStyles, props.class]"            
+            :color="color"
             :text-color="textColor"
             :disable="loading"
             @click="handleClick"

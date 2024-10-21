@@ -4,10 +4,11 @@
       <q-input
         filled
         :id="id"
-        :rules="[val => !!val || 'Este campo es obligatorio']"
+        :rules="[val => !!val || errorMessage || 'Este campo es obligatorio']"
         :type="showPassword ? 'text' : type"
         v-model="internalValue"
         :placeholder="placeholder"
+        :label="label"
         :class="['input-styled', { 'input-error': hasError }]"
       >
     <template v-slot:prepend>
@@ -52,6 +53,9 @@
     placeholder: {
       type: String,
     },
+    label: {
+      type: String,
+    },
     icon: {
       type: String,
     },
@@ -84,6 +88,12 @@ const togglePasswordVisibility = () => {
   </script>
   
   <style scoped>
+  .q-input {
+  font-size: 14px; /* Reducir el tamaño de la fuente */
+  padding: 6px 10px; /* Ajustar el padding interno */
+  margin-bottom: 10px; /* Reducir el margen inferior */
+}
+
   .input-container {
     display: flex;
     flex-direction: column;
@@ -91,12 +101,12 @@ const togglePasswordVisibility = () => {
   }
   
   .input-styled {
-    font-size: 16px;
+    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 8px;
     transition: border-color 0.2s;
     padding: 0px;
-    margin-bottom: 2%;
+    margin-bottom: 5px;
   }
   
   .input-styled:focus {
@@ -112,5 +122,6 @@ const togglePasswordVisibility = () => {
     font-size: 12px;
     margin-top: 4px;
   }
+
   </style>
   
