@@ -31,6 +31,6 @@ export async function putData(url, data) {
         return response.data;  // Devuelve los datos de la respuesta
     } catch (error) {
         console.error('Error en la petición PUT:', error);
-        throw error;
-    }
+        throw error;
+ }
 }

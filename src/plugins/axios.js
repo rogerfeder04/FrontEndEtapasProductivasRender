@@ -3,7 +3,7 @@ import axios from 'axios';
 const token = localStorage.getItem('token') || '';
 
 const apiClient = axios.create({
-    baseURL: 'https://etapasproductivasback.onrender.com/api',
+    baseURL: 'https://backendetapasproductivas.onrender.com/api',
     headers: {
         "token": token 
     }
